@@ -20,4 +20,4 @@ then run the newly created file:
 ```
 start.bat
 ```
-If you encounter any errors, please report them to me as soon as possible.
+**If you encounter any errors, please report them to me as soon as possible.**
