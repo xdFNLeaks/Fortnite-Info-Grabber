@@ -24,3 +24,8 @@ start.bat
 
 
 **PLEASE DO NOT STEAL THE CODE, CREDIT ME IF U USE IT FOR OTHER PROJECTS**
+
+## **Follow Me!**
+[**Follow me on Twitter!**](https://twitter.com/xdFNLeaks)
+
+[Join **The Sideways** Discord Server](https://discord.gg/5Z5p2GEMS5)
