@@ -4,7 +4,7 @@
 - [x] Grab Version Info
 - [x] Grab AES Keys
 - [x] Search for any Cosmetic
-- [ ] Post to Twitter
+- [x] Post to Twitter
 ## **Requirements**
 - [Python 3.9.7](https://www.python.org/downloads/release/python-397/) or Higher, [Get the Latest Here](https://www.python.org/ftp/python/3.10.0/python-3.10.0-amd64.exe)
 - PIP (comes in python installation)
