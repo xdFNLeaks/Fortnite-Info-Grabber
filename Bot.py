@@ -10,7 +10,8 @@ os.system('cls' if os.name == 'nt' else 'clear')
 colorama.init(autoreset=True)
 
 #---------------------#
-tweet = False # Set to False if you do not want to tweet stuff, set to True if you do want to tweet stuff.
+tweet = False 
+# Set to False if you do not want to tweet stuff, set to True if you do want to tweet stuff.
 
 # Get Twitter API keys from https://developer.twitter.com/en
 twitAPIKey = ''
@@ -82,4 +83,4 @@ elif option == 3:
     print(f"{Fore.LIGHTYELLOW_EX}Cosmetic Name: {Fore.RESET}{name}\n{Fore.LIGHTYELLOW_EX}Cosmetic Description: {Fore.RESET}{desc}\n{Fore.LIGHTYELLOW_EX}Cosmetic ID: {Fore.RESET}{CosmeticID}\n\n{Fore.LIGHTYELLOW_EX}Cosmetic Path: {Fore.RESET}{path}\n\n{Fore.LIGHTYELLOW_EX}Icon URL: {Fore.RESET}{icon}\n\n{Fore.LIGHTYELLOW_EX}Type: {Fore.RESET}{cosmeticTYPE}\n{Fore.LIGHTYELLOW_EX}Rarity: {Fore.RESET}{rarity}\n{Fore.LIGHTYELLOW_EX}Set: {Fore.RESET}{set}\n{Fore.LIGHTYELLOW_EX}Set Description: {Fore.RESET}{setDesc}\n\n{Fore.LIGHTYELLOW_EX}Variants: {Fore.RESET}{variants}\n\n\n{Fore.LIGHTYELLOW_EX}gameplayTags:\n {Fore.LIGHTCYAN_EX}{gameplayTags}\n\n{Fore.LIGHTGREEN_EX}Done!")
     
     if tweet == True:
-        api.update_status(f'Cosmetic Name: {name}\nCosmetic Description: {desc}\nCosmetic ID: {CosmeticID}\n\nIcon URL: {icon}\n\nType: {cosmeticTYPE}\nRarity: {rarity}\nSet: {set}')
+        api.update_status(f'{name}\n{desc}\nCosmetic ID: {CosmeticID}\n\nType: {cosmeticTYPE}\nRarity: {rarity}\nSet: {set}')
