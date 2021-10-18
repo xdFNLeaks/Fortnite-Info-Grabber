@@ -4,9 +4,20 @@ import os
 from colorama import init, Fore
 from time import sleep
 import os.path
+import tweepy
 init()
 os.system('cls' if os.name == 'nt' else 'clear')
 colorama.init(autoreset=True)
+
+#---------------------#
+tweet = False # Set to False if you do not want to tweet stuff, set to True if you do want to tweet stuff.
+
+# Get Twitter API keys from https://developer.twitter.com/en
+twitAPIKey = ''
+twitAPISecretKey = ''
+twitAccessToken = ''
+twitAccessTokenSecret = ''
+#---------------------#
 
 os.system("title Fortnite Info Grabber! /\ Developed by - xdFNLeaks")
 # VERSION INFO API
@@ -22,37 +33,53 @@ versionAES = response.json()['version']
 mainKey = response.json()['mainKey']
 dynamAES = response.json()['dynamicKeys']
 
+# Sets up Tweepy API
+auth = tweepy.OAuthHandler(twitAPIKey, twitAPISecretKey)
+auth.set_access_token(twitAccessToken, twitAccessTokenSecret)
+api = tweepy.API(auth)
+
 def menu():
-        print(f"{Fore.LIGHTCYAN_EX}Welcome to Fortnite Info Grabber!\nCreated by xdFNLeaks\n{Fore.RED}[!] THIS TOOL CANNOT POST TO TWITTER, MAY ADD IN FUTURE\nYou are able to copy & paste any of the info provided using this tool.\nJust dont copy the code! {Fore.LIGHTCYAN_EX}Enjoy!\nEnter a number to get started!\n{Fore.RESET}\n [{Fore.LIGHTYELLOW_EX}1{Fore.RESET}] = {Fore.LIGHTBLUE_EX}Show Version Info{Fore.RESET}\n [{Fore.LIGHTYELLOW_EX}2{Fore.RESET}] = {Fore.LIGHTBLUE_EX}Show AES Info{Fore.RESET}\n [{Fore.LIGHTYELLOW_EX}3{Fore.RESET}] = {Fore.LIGHTBLUE_EX}Search for Any Cosmetic!")
+    print(f"{Fore.LIGHTCYAN_EX}Welcome to Fortnite Info Grabber!\nCreated by xdFNLeaks\n{Fore.RED}[!] THIS TOOL CANNOT POST TO TWITTER, MAY ADD IN FUTURE\nYou are able to copy & paste any of the info provided using this tool.\nJust dont copy the code! {Fore.LIGHTCYAN_EX}Enjoy!\nEnter a number to get started!\n{Fore.RESET}\n [{Fore.LIGHTYELLOW_EX}1{Fore.RESET}] = {Fore.LIGHTBLUE_EX}Show Version Info{Fore.RESET}\n [{Fore.LIGHTYELLOW_EX}2{Fore.RESET}] = {Fore.LIGHTBLUE_EX}Show AES Info{Fore.RESET}\n [{Fore.LIGHTYELLOW_EX}3{Fore.RESET}] = {Fore.LIGHTBLUE_EX}Search for Any Cosmetic!")
 menu()
 
 option = int(input(f"{Fore.LIGHTRED_EX}\nEnter Number: {Fore.RESET}"))
 
 if option == 1:
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print(f"{Fore.LIGHTGREEN_EX}Current Fortnite Version:\n\n{Fore.LIGHTCYAN_EX}{version}\n\n{Fore.LIGHTCYAN_EX}v{versionNum}0{Fore.LIGHTGREEN_EX}\nTotal Pak Count: {Fore.LIGHTCYAN_EX}{pakCount}\n\n{Fore.LIGHTGREEN_EX}Dynamic Pak Count: {Fore.LIGHTCYAN_EX}{dynamCount}\n{Fore.LIGHTGREEN_EX}All Pak Files Detected: \n\n{Fore.LIGHTCYAN_EX}{allPakFiles}")
-        print(f"{Fore.LIGHTGREEN_EX}Done!{Fore.RED}\nFEEL FREE TO COPY & PASTE!")
-        exit()
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print(f"{Fore.LIGHTGREEN_EX}Current Fortnite Version:\n\n{Fore.LIGHTCYAN_EX}{version}\n\n{Fore.LIGHTCYAN_EX}v{versionNum}0{Fore.LIGHTGREEN_EX}\nTotal Pak Count: {Fore.LIGHTCYAN_EX}{pakCount}\n\n{Fore.LIGHTGREEN_EX}Dynamic Pak Count: {Fore.LIGHTCYAN_EX}{dynamCount}\n{Fore.LIGHTGREEN_EX}All Pak Files Detected: \n\n{Fore.LIGHTCYAN_EX}{allPakFiles}")
+    print(f"{Fore.LIGHTGREEN_EX}Done!{Fore.RED}\nFEEL FREE TO COPY & PASTE!")
+    if tweet == True:
+        api.update_status(f'Current Fortnite Version:\n\n{version}\n\nv{versionNum}0\nTotal Pak Count: {pakCount}\n\nDynamic Pak Count: {dynamCount}\nAll Pak Files Detected: \n\n{allPakFiles}')
+        print('Tweeted')
+    exit()
         
 elif option == 2:
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print(f"{Fore.LIGHTGREEN_EX}Current Fortnite Version: \n{Fore.LIGHTCYAN_EX}{versionAES}\n{Fore.LIGHTCYAN_EX}v{versionNum}0\n{Fore.LIGHTGREEN_EX}Main AES Key: \n{Fore.LIGHTCYAN_EX}{mainKey}\n\n{Fore.LIGHTGREEN_EX}Dynamic AES Keys: \n{Fore.LIGHTCYAN_EX}{dynamAES}")
-        print(f"{Fore.LIGHTGREEN_EX}Done!{Fore.RED}\nFEEL FREE TO COPY & PASTE!")
-        exit()
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print(f"{Fore.LIGHTGREEN_EX}Current Fortnite Version: \n{Fore.LIGHTCYAN_EX}{versionAES}\n{Fore.LIGHTCYAN_EX}v{versionNum}0\n{Fore.LIGHTGREEN_EX}Main AES Key: \n{Fore.LIGHTCYAN_EX}{mainKey}\n\n{Fore.LIGHTGREEN_EX}Dynamic AES Keys: \n{Fore.LIGHTCYAN_EX}{dynamAES}")
+    print(f"{Fore.LIGHTGREEN_EX}Done!{Fore.RED}\nFEEL FREE TO COPY & PASTE!")
+    if tweet == True:
+        try:
+            api.update_status(f'Current Fortnite Version: \n{versionAES}\nv{versionNum}0\nMain AES Key: \n{mainKey}\n\nDynamic AES Keys: \n{dynamAES}')
+        except Exception as e:
+            print(e)
+        print('Tweeted')
+    exit()
 elif option == 3:
-        cosmetic = input(f"Cosmetic Name Please? [>] ")
-        response = requests.get(f'https://benbot.app/api/v1/cosmetics/br/search?name={cosmetic}')
-        CosmeticID = response.json()['id']
-        path = response.json()['path']
-        icon = response.json()['icons']['icon']
-        name = response.json()['name']
-        desc = response.json()['description']
-        cosmeticTYPE = response.json()['shortDescription']
-        rarity = response.json()['rarity']
-        set = response.json()['set']
-        setDesc = response.json()['setText']
-        gameplayTags = response.json()['gameplayTags']
-        variants = response.json()['variants']
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print(f"{Fore.LIGHTYELLOW_EX}Cosmetic Name: {Fore.RESET}{name}\n{Fore.LIGHTYELLOW_EX}Cosmetic Description: {Fore.RESET}{desc}\n{Fore.LIGHTYELLOW_EX}Cosmetic ID: {Fore.RESET}{CosmeticID}\n\n{Fore.LIGHTYELLOW_EX}Cosmetic Path: {Fore.RESET}{path}\n\n{Fore.LIGHTYELLOW_EX}Icon URL: {Fore.RESET}{icon}\n\n{Fore.LIGHTYELLOW_EX}Type: {Fore.RESET}{cosmeticTYPE}\n{Fore.LIGHTYELLOW_EX}Rarity: {Fore.RESET}{rarity}\n{Fore.LIGHTYELLOW_EX}Set: {Fore.RESET}{set}\n{Fore.LIGHTYELLOW_EX}Set Description: {Fore.RESET}{setDesc}\n\n{Fore.LIGHTYELLOW_EX}Variants: {Fore.RESET}{variants}\n\n\n{Fore.LIGHTYELLOW_EX}gameplayTags:\n {Fore.LIGHTCYAN_EX}{gameplayTags}\n\n{Fore.LIGHTGREEN_EX}Done!")
-        
+    cosmetic = input(f"Cosmetic Name Please? [>] ")
+    response = requests.get(f'https://benbot.app/api/v1/cosmetics/br/search?name={cosmetic}')
+    CosmeticID = response.json()['id']
+    path = response.json()['path']
+    icon = response.json()['icons']['icon']
+    name = response.json()['name']
+    desc = response.json()['description']
+    cosmeticTYPE = response.json()['shortDescription']
+    rarity = response.json()['rarity']
+    set = response.json()['set']
+    setDesc = response.json()['setText']
+    gameplayTags = response.json()['gameplayTags']
+    variants = response.json()['variants']
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print(f"{Fore.LIGHTYELLOW_EX}Cosmetic Name: {Fore.RESET}{name}\n{Fore.LIGHTYELLOW_EX}Cosmetic Description: {Fore.RESET}{desc}\n{Fore.LIGHTYELLOW_EX}Cosmetic ID: {Fore.RESET}{CosmeticID}\n\n{Fore.LIGHTYELLOW_EX}Cosmetic Path: {Fore.RESET}{path}\n\n{Fore.LIGHTYELLOW_EX}Icon URL: {Fore.RESET}{icon}\n\n{Fore.LIGHTYELLOW_EX}Type: {Fore.RESET}{cosmeticTYPE}\n{Fore.LIGHTYELLOW_EX}Rarity: {Fore.RESET}{rarity}\n{Fore.LIGHTYELLOW_EX}Set: {Fore.RESET}{set}\n{Fore.LIGHTYELLOW_EX}Set Description: {Fore.RESET}{setDesc}\n\n{Fore.LIGHTYELLOW_EX}Variants: {Fore.RESET}{variants}\n\n\n{Fore.LIGHTYELLOW_EX}gameplayTags:\n {Fore.LIGHTCYAN_EX}{gameplayTags}\n\n{Fore.LIGHTGREEN_EX}Done!")
+    
+    if tweet == True:
+        api.update_status(f'Cosmetic Name: {name}\nCosmetic Description: {desc}\nCosmetic ID: {CosmeticID}\n\nIcon URL: {icon}\n\nType: {cosmeticTYPE}\nRarity: {rarity}\nSet: {set}')
