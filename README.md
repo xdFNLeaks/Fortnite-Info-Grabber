@@ -1,4 +1,4 @@
-## **Fortnite-Info-Grabber**
+## **Fortnite-Info-Grabber (DISCONTINUED FOR THE MOMENT)**
 **Fortnite-Info-Grabber** is a tool to easily Grab info about certain things in the game, Fortnite.
 ## **Features**
 - [x] Grab Version Info
